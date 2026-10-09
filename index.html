@@ -1,0 +1,2626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ahmed Abdalla | Data Science Student</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
+        :root {
+            --bg: #05070d;
+            --bg-secondary: #0b0f19;
+            --card: rgba(255,255,255,0.045);
+            --card-hover: rgba(255,255,255,0.075);
+
+            --text: #f4f7fb;
+            --text-secondary: #9ba6b8;
+
+            --primary: #00e5ff;
+            --secondary: #7c3aed;
+            --accent: #00ffa3;
+
+            --border: rgba(255,255,255,0.09);
+
+            --shadow:
+                0 20px 60px rgba(0,0,0,0.35);
+
+            --radius: 22px;
+        }
+
+        body.light {
+            --bg: #f5f7fb;
+            --bg-secondary: #ffffff;
+            --card: rgba(0,0,0,0.035);
+            --card-hover: rgba(0,0,0,0.06);
+
+            --text: #111827;
+            --text-secondary: #5b6473;
+
+            --border: rgba(0,0,0,0.1);
+
+            --shadow:
+                0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(0,229,255,0.08), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(124,58,237,0.10), transparent 30%),
+                var(--bg);
+
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+
+            transition:
+                background 0.4s ease,
+                color 0.4s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: min(1150px, 92%);
+            margin: auto;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title span {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .section-title h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-top: 10px;
+        }
+
+        .section-title p {
+            max-width: 650px;
+            margin: 15px auto 0;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            background: rgba(5,7,13,0.65);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        body.light header {
+            background: rgba(255,255,255,0.75);
+        }
+
+        nav {
+            min-height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-btn,
+        .menu-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .theme-btn:hover,
+        .menu-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            background: var(--card);
+
+            border-radius: 100px;
+
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 25px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 90px);
+            line-height: 0.95;
+            letter-spacing: -5px;
+            margin-bottom: 25px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(
+                90deg,
+                var(--primary),
+                #ffffff,
+                var(--secondary)
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero h2 {
+            font-size: clamp(20px, 3vw, 30px);
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            color: var(--text-secondary);
+            max-width: 650px;
+            font-size: 17px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #001014;
+            box-shadow: 0 0 30px rgba(0,229,255,0.2);
+        }
+
+        .btn-secondary {
+            background: var(--card);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+        }
+
+        /* =========================================================
+           HERO DATA CARD
+        ========================================================= */
+
+        .hero-card {
+            position: relative;
+            min-height: 400px;
+
+            border: 1px solid var(--border);
+            background: var(--card);
+
+            border-radius: 30px;
+
+            padding: 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: "";
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            background: var(--primary);
+            filter: blur(120px);
+            opacity: 0.12;
+
+            top: -80px;
+            right: -80px;
+        }
+
+        .profile-circle {
+            width: 210px;
+            height: 210px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(var(--bg-secondary), var(--bg-secondary))
+                padding-box,
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary),
+                    var(--accent)
+                )
+                border-box;
+
+            border: 3px solid transparent;
+
+            box-shadow:
+                0 0 40px rgba(0,229,255,0.15),
+                inset 0 0 30px rgba(0,229,255,0.08);
+        }
+
+        .profile-circle span {
+            font-size: 60px;
+            font-weight: 800;
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                var(--secondary)
+            );
+
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* =========================================================
+           ABOUT
+        ========================================================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.7fr 1.3fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .photo-placeholder {
+            min-height: 430px;
+
+            border-radius: 28px;
+            border: 1px solid var(--border);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(0,229,255,0.08),
+                    rgba(124,58,237,0.08)
+                ),
+                var(--card);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder::after {
+            content: "AHMED ABDALLA";
+
+            position: absolute;
+            bottom: 20px;
+
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--text-secondary);
+        }
+
+        .photo-icon {
+            font-size: 80px;
+            opacity: 0.25;
+        }
+
+        .about-content h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .info-box {
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            background: var(--card);
+        }
+
+        .info-box strong {
+            display: block;
+            color: var(--primary);
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .info-box span {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================================
+           SKILLS
+        ========================================================= */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .skill-card {
+            padding: 28px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: var(--radius);
+            transition: 0.35s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-7px);
+            background: var(--card-hover);
+            border-color: rgba(0,229,255,0.3);
+        }
+
+        .skill-card h3 {
+            margin-bottom: 20px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            padding: 9px 13px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.025);
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           HOLOGRAPHIC SKILLS CHART
+        ========================================================= */
+
+        .holo-wrapper {
+            margin-top: 35px;
+            padding: 30px;
+
+            border: 1px solid rgba(0,229,255,0.2);
+            border-radius: 25px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(0,229,255,0.07),
+                    transparent 55%
+                ),
+                var(--card);
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .holo-wrapper::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 95%,
+                    rgba(0,229,255,0.08) 100%
+                );
+
+            background-size: 100% 8px;
+
+            pointer-events: none;
+
+            animation: scan 5s linear infinite;
+        }
+
+        @keyframes scan {
+            from {
+                transform: translateY(-30px);
+            }
+
+            to {
+                transform: translateY(30px);
+            }
+        }
+
+        .holo-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+            letter-spacing: 2px;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        #skillsChart {
+            width: 100%;
+            height: 430px;
+            display: block;
+        }
+
+        /* =========================================================
+           PROJECTS
+        ========================================================= */
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 22px;
+        }
+
+        .project-card {
+            padding: 28px;
+
+            min-height: 280px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: var(--card);
+
+            display: flex;
+            flex-direction: column;
+
+            transition: 0.35s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0,229,255,0.35);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .project-number {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .project-card h3 {
+            margin: 20px 0 12px;
+            font-size: 22px;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .project-tech {
+            margin-top: auto;
+            padding-top: 20px;
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           EXPERIENCE
+        ========================================================= */
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .timeline::before {
+            content: "";
+
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+
+            width: 2px;
+
+            background: linear-gradient(
+                var(--primary),
+                var(--secondary),
+                transparent
+            );
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 65px;
+            margin-bottom: 35px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+
+            left: 11px;
+            top: 5px;
+
+            width: 20px;
+            height: 20px;
+
+            border-radius: 50%;
+
+            background: var(--bg);
+
+            border: 3px solid var(--primary);
+
+            box-shadow: 0 0 20px rgba(0,229,255,0.5);
+        }
+
+        .timeline-card {
+            padding: 25px;
+
+            border: 1px solid var(--border);
+            background: var(--card);
+
+            border-radius: 20px;
+        }
+
+        .timeline-card small {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .timeline-card h3 {
+            margin: 5px 0;
+        }
+
+        .timeline-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .timeline-card ul {
+            margin-top: 15px;
+            padding-left: 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* =========================================================
+           SERVICES
+        ========================================================= */
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 18px;
+        }
+
+        .service-card {
+            padding: 25px;
+
+            border: 1px solid var(--border);
+            background: var(--card);
+
+            border-radius: 20px;
+
+            transition: 0.35s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+        }
+
+        .service-icon {
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .service-card h3 {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           CAREER VISION
+        ========================================================= */
+
+        .vision {
+            padding: 70px 40px;
+
+            text-align: center;
+
+            border-radius: 30px;
+
+            border: 1px solid rgba(0,229,255,0.2);
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(0,229,255,0.12),
+                    transparent 55%
+                ),
+                var(--card);
+        }
+
+        .vision h2 {
+            font-size: clamp(28px,5vw,48px);
+            margin-bottom: 20px;
+        }
+
+        .vision p {
+            max-width: 750px;
+            margin: auto;
+            color: var(--text-secondary);
+        }
+
+        .vision .quote {
+            margin-top: 25px;
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        /* =========================================================
+           CONTACT
+        ========================================================= */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 30px;
+        }
+
+        .contact-info,
+        .contact-form {
+            padding: 30px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: var(--card);
+        }
+
+        .contact-info h3 {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        .contact-link {
+            display: block;
+            padding: 13px 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .contact-link:hover {
+            color: var(--primary);
+            padding-left: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--border);
+
+            background: rgba(255,255,255,0.025);
+
+            color: var(--text);
+
+            outline: none;
+
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding: 30px 0;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--text-secondary);
+
+            font-size: 13px;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .back-top {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           SCROLL ANIMATION
+        ========================================================= */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media(max-width: 950px) {
+
+            .hero,
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card {
+                min-height: 320px;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+        }
+
+        @media(max-width: 700px) {
+
+            section {
+                padding: 75px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+
+                top: 75px;
+                left: 0;
+
+                width: 100%;
+
+                flex-direction: column;
+
+                padding: 25px;
+
+                background: var(--bg-secondary);
+
+                border-bottom: 1px solid var(--border);
+
+                transform: translateY(-150%);
+                transition: 0.35s;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+
+            .projects-grid,
+            .services-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-placeholder {
+                min-height: 300px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            #skillsChart {
+                height: 350px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         HEADER
+    ========================================================= -->
+
+    <header>
+
+        <div class="container">
+
+            <nav>
+
+                <a href="#home" class="logo">
+                    Ahmed<span>.</span>
+                </a>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <div class="nav-actions">
+
+                    <button class="theme-btn" id="themeBtn">
+                        ☾
+                    </button>
+
+                    <button class="menu-btn" id="menuBtn">
+                        ☰
+                    </button>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
+
+        <section id="home">
+
+            <div class="container hero">
+
+                <div class="hero-content reveal">
+
+                    <div class="hero-tag">
+                        <span class="status-dot"></span>
+                        Open to Opportunities
+                    </div>
+
+                    <h1>
+                        Ahmed
+                        <span class="gradient-text">
+                            Abdalla
+                        </span>
+                    </h1>
+
+                    <h2>
+                        Data Science Student | Statistics & Data Science
+                    </h2>
+
+                    <p class="hero-description">
+                        Fourth-year Statistics & Data Science student at
+                        Zagazig University with a strong passion for
+                        Data Science, Data Analysis, Artificial Intelligence,
+                        and turning data into meaningful business insights.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="#projects" class="btn btn-primary">
+                            View Projects
+                        </a>
+
+                        <a href="#contact" class="btn btn-secondary">
+                            Contact Me
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-card reveal">
+
+                    <div class="profile-circle">
+                        <span>AA</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ABOUT
+        ====================================================== -->
+
+        <section id="about">
+
+            <div class="container">
+
+                <div class="section-title reveal">
+
+                    <span>About Me</span>
+
+                    <h2>Building Skills Through Data</h2>
+
+                    <p>
+                        A continuous learner focused on transforming
+                        knowledge into practical solutions.
+                    </p>
+
+                </div>
+
+
+                <div class="about-grid">
+
+                    <div class="photo-placeholder reveal">
+
+                        <div class="photo-icon">
+                            <img src="profile.jpg.jpeg" width="250">
+                        </div>
+
+                    </div>
+
+
+                    <div class="about-content reveal">
+
+                        <h3>
+                            Turning curiosity into capability.
+                        </h3>
+
+                        <p>
+                            I am a Statistics & Data Science student at
+                            Zagazig University with a strong interest in
+                            data analysis, programming, statistics, and
+                            emerging AI technologies.
+                        </p>
+
+                        <p>
+                            I believe continuous learning is essential in
+                            technology. I actively develop my technical
+                            skills, explore modern tools, and build practical
+                            projects that strengthen my ability to solve
+                            real-world problems.
+                        </p>
+
+                        <p>
+                            I enjoy teamwork, knowledge sharing, analytical
+                            thinking, and contributing to projects that
+                            create measurable value for organizations.
+                        </p>
+
+
+                        <div class="info-grid">
+
+                            <div class="info-box">
+                                <strong>Education</strong>
+                                <span>
+                                    Zagazig University
+                                </span>
+                            </div>
+
+                            <div class="info-box">
+                                <strong>Department</strong>
+                                <span>
+                                    Statistics & Data Science
+                                </span>
+                            </div>
+
+                            <div class="info-box">
+                                <strong>English</strong>
+                                <span>
+                                    Very Good
+                                </span>
+                            </div>
+
+                            <div class="info-box">
+                                <strong>Arabic</strong>
+                                <span>
+                                    Native
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SKILLS
+        ====================================================== -->
+
+        <section id="skills">
+
+            <div class="container">
+
+                <div class="section-title reveal">
+
+                    <span>Technical Expertise</span>
+
+                    <h2>Skills & Capabilities</h2>
+
+                    <p>
+                        A growing technical foundation across programming,
+                        analytics, statistics, and artificial intelligence.
+                    </p>
+
+                </div>
+
+
+                <div class="skills-grid">
+
+                    <div class="skill-card reveal">
+
+                        <h3>Technical Skills</h3>
+
+                        <div class="skill-list">
+
+                            <span class="skill">Python</span>
+                            <span class="skill">SQL</span>
+                            <span class="skill">Excel</span>
+                            <span class="skill">Statistics</span>
+                            <span class="skill">Power BI</span>
+                            <span class="skill">Data Analysis</span>
+                            <span class="skill">Machine Learning</span>
+                            <span class="skill">Artificial Intelligence</span>
+                            <span class="skill">Problem Solving</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="skill-card reveal">
+
+                        <h3>Professional Skills</h3>
+
+                        <div class="skill-list">
+
+                            <span class="skill">Teamwork</span>
+                            <span class="skill">Communication</span>
+                            <span class="skill">Continuous Learning</span>
+                            <span class="skill">Adaptability</span>
+                            <span class="skill">Analytical Thinking</span>
+                            <span class="skill">Problem Solving</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HOLOGRAPHIC CHART -->
+
+                <div class="holo-wrapper reveal">
+
+                    <div class="holo-title">
+                        ◈ HOLOGRAPHIC SKILL ANALYTICS ◈
+                    </div>
+
+                    <canvas id="skillsChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PROJECTS
+        ====================================================== -->
+
+        <section id="projects">
+
+            <div class="container">
+
+                <div class="section-title reveal">
+
+                    <span>Selected Work</span>
+
+                    <h2>Projects</h2>
+
+                    <p>
+                        Practical projects developed throughout my
+                        programming and Data Science learning journey.
+                    </p>
+
+                </div>
+
+
+                <div class="projects-grid">
+
+
+                    <article class="project-card reveal">
+
+                        <span class="project-number">
+                            01 / PROJECT
+                        </span>
+
+                        <h3>
+                            Python Calculator
+                        </h3>
+
+                        <p>
+                            A simple calculator developed with Python
+                            to practice programming fundamentals,
+                            mathematical operations, logical thinking,
+                            and basic program structure.
+                        </p>
+
+                        <div class="project-tech">
+                            PYTHON
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-card reveal">
+
+                        <span class="project-number">
+                            02 / PROJECT
+                        </span>
+
+                        <h3>
+                            Number Guessing Game
+                        </h3>
+
+                        <p>
+                            An interactive Python game designed to
+                            strengthen programming logic, user input,
+                            conditions, loops, and fundamental
+                            problem-solving skills.
+                        </p>
+
+                        <div class="project-tech">
+                            PYTHON
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-card reveal">
+
+                        <span class="project-number">
+                            03 / FUTURE
+                        </span>
+
+                        <h3>
+                            Data Analysis Projects
+                        </h3>
+
+                        <p>
+                            Future projects focused on exploring datasets,
+                            identifying patterns, generating insights,
+                            and presenting analytical results.
+                        </p>
+
+                        <div class="project-tech">
+                            PYTHON • SQL • POWER BI
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-card reveal">
+
+                        <span class="project-number">
+                            04 / FUTURE
+                        </span>
+
+                        <h3>
+                            Machine Learning
+                        </h3>
+
+                        <p>
+                            Upcoming projects exploring predictive
+                            modeling, machine learning algorithms,
+                            statistical analysis, and intelligent
+                            decision-making.
+                        </p>
+
+                        <div class="project-tech">
+                            PYTHON • ML • STATISTICS
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-card reveal">
+
+                        <span class="project-number">
+                            05 / FUTURE
+                        </span>
+
+                        <h3>
+                            AI Solutions
+                        </h3>
+
+                        <p>
+                            Future artificial intelligence projects
+                            focused on applying modern AI techniques
+                            to practical business and analytical problems.
+                        </p>
+
+                        <div class="project-tech">
+                            PYTHON • AI • DATA
+                        </div>
+                        
+
+
+                    </article>
+                    
+                    <article class="project-card reveal">
+
+                        <span class="project-number">
+                            06 / FUTURE
+                            <span>
+                                <h3>
+                                         NVIDIA DLI                                </h3>
+                                <p>
+                                    • Python Fundamentals            
+                                </p>
+                                <p>• Al For All: From Basics To GenAl Practice</p>
+                                <p>• Generative Al Explained</p>
+                                <p>• Building LLM Applications With Prompt Engineering</p>
+                                <p>• Augment Your LLM Using RAG</p>
+                            </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             EXPERIENCE / TRAINING
+        ====================================================== -->
+
+        <section id="experience">
+
+            <div class="container">
+
+                <div class="section-title reveal">
+
+                    <span>Professional Journey</span>
+
+                    <h2>Training & Activities</h2>
+
+                    <p>
+                        Experiences that helped develop professional,
+                        communication, teamwork, and organizational skills.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline">
+
+
+                    <div class="timeline-item reveal">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-card">
+
+                            <small>Banking Training</small>
+
+                            <h3>CIB Bank</h3>
+
+                            <p>
+                                Professional Banking Training
+                            </p>
+
+                            <ul>
+                                <li>
+                                    Gained exposure to a professional
+                                    banking environment.
+                                </li>
+
+                                <li>
+                                    Developed awareness of workplace
+                                    practices and professional standards.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item reveal">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-card">
+
+                            <small>Corporate Training</small>
+
+                            <h3>HSBC Bank</h3>
+
+                            <p>
+                                Professional Banking Training
+                            </p>
+
+                            <ul>
+
+                                <li>
+                                    Developed professional awareness.
+                                </li>
+
+                                <li>
+                                    Experienced a corporate banking
+                                    environment.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item reveal">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-card">
+
+                            <small>Training / Certificate</small>
+
+                            <h3>Banque Misr</h3>
+
+                            <p>
+                                Banking Sector Training
+                            </p>
+
+                            <ul>
+
+                                <li>
+                                    Gained additional exposure to the
+                                    banking sector.
+                                </li>
+
+                                <li>
+                                    Improved professional workplace skills.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item reveal">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-card">
+
+                            <small>Volunteering</small>
+
+                            <h3>Youth Leaders Foundation (YLY)</h3>
+
+                            <p>
+                                HR Team Member
+                            </p>
+
+                            <ul>
+
+                                <li>
+                                    Participated in HR activities.
+                                </li>
+
+                                <li>
+                                    Helped organize multiple events.
+                                </li>
+
+                                <li>
+                                    Developed teamwork, communication,
+                                    and organizational skills.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item reveal">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-card">
+
+                            <small>Activities</small>
+
+                            <h3>Arab Youth Summit</h3>
+
+                            <p>
+                                Participated in youth-focused activities,
+                                teamwork, networking, and collaborative
+                                experiences.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item reveal">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-card">
+
+                            <small>Career Development</small>
+
+                            <h3>Be Ready Week</h3>
+
+                            <p>
+                                Participated in professional development
+                                and career preparation activities.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SERVICES
+        ====================================================== -->
+
+        <section id="services">
+
+            <div class="container">
+
+                <div class="section-title reveal">
+
+                    <span>What I Do</span>
+
+                    <h2>Areas of Focus</h2>
+
+                    <p>
+                        Areas where I am developing expertise and
+                        creating practical value.
+                    </p>
+
+                </div>
+
+
+                <div class="services-grid">
+
+                    <div class="service-card reveal">
+
+                        <div class="service-icon">
+                            📊
+                        </div>
+
+                        <h3>Data Analysis</h3>
+
+                        <p>
+                            Exploring datasets, identifying patterns,
+                            and transforming raw information into
+                            meaningful insights.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card reveal">
+
+                        <div class="service-icon">
+                            📈
+                        </div>
+
+                        <h3>Data Visualization</h3>
+
+                        <p>
+                            Creating clear and useful visualizations
+                            that communicate analytical findings
+                            effectively.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card reveal">
+
+                        <div class="service-icon">
+                            🤖
+                        </div>
+
+                        <h3>Machine Learning</h3>
+
+                        <p>
+                            Developing knowledge in predictive models,
+                            statistical learning, and intelligent systems.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card reveal">
+
+                        <div class="service-icon">
+                            🧠
+                        </div>
+
+                        <h3>AI & Statistics</h3>
+
+                        <p>
+                            Combining statistical thinking with
+                            emerging artificial intelligence technologies.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CAREER VISION
+        ====================================================== -->
+
+        <section>
+
+            <div class="container">
+
+                <div class="vision reveal">
+
+                    <h2>
+                        Career Vision
+                    </h2>
+
+                    <p>
+                        My goal is to build a strong career in Data Science
+                        and become a professional Data Scientist capable of
+                        analyzing complex datasets, discovering valuable
+                        insights, and supporting organizations in making
+                        better strategic decisions.
+                    </p>
+
+                    <p style="margin-top:18px;">
+                        I aim to continuously improve my technical skills,
+                        stay updated with AI and emerging technologies,
+                        and contribute to both on-site and remote teams
+                        where data can create measurable business value.
+                    </p>
+
+                    <div class="quote">
+                        Learn continuously. Analyze intelligently.
+                        Create real value through data.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CONTACT
+        ====================================================== -->
+
+        <section id="contact">
+
+            <div class="container">
+
+                <div class="section-title reveal">
+
+                    <span>Get In Touch</span>
+
+                    <h2>Let's Connect</h2>
+
+                    <p>
+                        Interested in collaboration, opportunities,
+                        or simply discussing Data Science?
+                    </p>
+
+                </div>
+
+
+                <div class="contact-grid">
+
+
+                    <div class="contact-info reveal">
+
+                        <h3>
+                            Contact Information
+                        </h3>
+
+                        <p>
+                            I am open to professional opportunities,
+                            internships, collaborations, and learning
+                            experiences in Data Science and AI.
+                        </p>
+
+
+                        <a
+                            class="contact-link"
+                            href="mailto:ahm123ed010@gmail.com"
+                        >
+                            ✉️ ahm123ed010@gmail.com
+                        </a>
+
+
+                        <a
+                            class="contact-link"
+                            href="tel:01061780762"
+                        >
+                            📱 01061780762
+                        </a>
+
+
+                        <a
+                            class="contact-link"
+                            href="https://www.linkedin.com/in/ahmed-abdallahh?/"
+                            target="_blank"
+                        >
+                            LinkedIn
+                        </a>
+
+
+                        <a
+                            class="contact-link"
+                            href="https://github.com/ahm123ed010-bit"
+                            target="_blank"
+                        >
+                            GitHub
+                        </a>
+
+
+                    
+
+
+                        <a
+                            class="contact-link"
+                            href="https://www.facebook.com/share/1F6CcMiDxy/?mibextid=wwXIfr/"
+                            target="_blank"
+                        >
+                            Facebook
+                        </a>
+
+
+                        <a
+                            class="contact-link"
+                            href="https://www.instagram.com/ahmed__abdalla10?exln=MW5iN2wydDh2eDFzbQ==/"
+                            target="_blank"
+                        >
+                            Instagram
+                        </a>
+
+                    </div>
+
+
+                    <form
+                        class="contact-form reveal"
+                        id="contactForm"
+                    >
+
+                        <div class="form-group">
+
+                            <label>
+                                Your Name
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="Enter your name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Message
+                            </label>
+
+                            <textarea
+                                placeholder="Write your message..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            Send Message
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer>
+
+        <div class="container footer-content">
+
+            <p>
+                © <span id="year"></span>
+                Ahmed Abdalla. All Rights Reserved.
+            </p>
+
+            <a
+                href="#home"
+                class="back-top"
+            >
+                Back to Top ↑
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        /* =====================================================
+           MOBILE MENU
+        ===================================================== */
+
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        menuBtn.addEventListener("click", () => {
+
+            navLinks.classList.toggle("active");
+
+            menuBtn.textContent =
+                navLinks.classList.contains("active")
+                ? "✕"
+                : "☰";
+
+        });
+
+
+        /* Close menu after clicking a link */
+
+        document.querySelectorAll(".nav-links a")
+            .forEach(link => {
+
+                link.addEventListener("click", () => {
+
+                    navLinks.classList.remove("active");
+
+                    menuBtn.textContent = "☰";
+
+                });
+
+            });
+
+
+        /* =====================================================
+           DARK / LIGHT MODE
+        ===================================================== */
+
+        const themeBtn = document.getElementById("themeBtn");
+
+        const savedTheme =
+            localStorage.getItem("theme");
+
+        if (savedTheme === "light") {
+
+            document.body.classList.add("light");
+
+            themeBtn.textContent = "☀";
+
+        }
+
+
+        themeBtn.addEventListener("click", () => {
+
+            document.body.classList.toggle("light");
+
+            const isLight =
+                document.body.classList.contains("light");
+
+            localStorage.setItem(
+                "theme",
+                isLight ? "light" : "dark"
+            );
+
+            themeBtn.textContent =
+                isLight ? "☀" : "☾";
+
+            drawChart();
+
+        });
+
+
+        /* =====================================================
+           SCROLL REVEAL ANIMATION
+        ===================================================== */
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("active");
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+
+        document
+            .querySelectorAll(".reveal")
+            .forEach(element => {
+
+                observer.observe(element);
+
+            });
+
+
+        /* =====================================================
+           FOOTER YEAR
+        ===================================================== */
+
+        document.getElementById("year")
+            .textContent =
+            new Date().getFullYear();
+
+
+        /* =====================================================
+           CONTACT FORM
+        ===================================================== */
+
+        document
+            .getElementById("contactForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                alert(
+                    "Thank you for contacting Ahmed Abdalla!"
+                );
+
+                this.reset();
+
+            });
+
+
+        /* =====================================================
+           HOLOGRAPHIC SKILLS CHART
+        ===================================================== */
+
+        const canvas =
+            document.getElementById("skillsChart");
+
+        const ctx =
+            canvas.getContext("2d");
+
+
+        const skills = [
+
+            {
+                name: "Python",
+                value: 88
+            },
+
+            {
+                name: "Data Analysis",
+                value: 85
+            },
+
+            {
+                name: "Statistics",
+                value: 90
+            },
+
+            {
+                name: "SQL",
+                value: 78
+            },
+
+            {
+                name: "Power BI",
+                value: 75
+            },
+
+            {
+                name: "Machine Learning",
+                value: 70
+            },
+
+            {
+                name: "AI",
+                value: 68
+            },
+
+            {
+                name: "Excel",
+                value: 85
+            },
+
+            {
+                name: "Problem Solving",
+                value: 88
+            }
+
+        ];
+
+
+        function resizeCanvas() {
+
+            const rect =
+                canvas.getBoundingClientRect();
+
+            const dpr =
+                window.devicePixelRatio || 1;
+
+            canvas.width =
+                rect.width * dpr;
+
+            canvas.height =
+                rect.height * dpr;
+
+            ctx.setTransform(
+                dpr,
+                0,
+                0,
+                dpr,
+                0,
+                0
+            );
+
+        }
+
+
+        function drawChart() {
+
+            resizeCanvas();
+
+            const width =
+                canvas.clientWidth;
+
+            const height =
+                canvas.clientHeight;
+
+
+            ctx.clearRect(
+                0,
+                0,
+                width,
+                height
+            );
+
+
+            /* Theme colors */
+
+            const isLight =
+                document.body.classList.contains("light");
+
+            const primary =
+                isLight
+                ? "#008fa3"
+                : "#00e5ff";
+
+            const secondary =
+                isLight
+                ? "#6d28d9"
+                : "#7c3aed";
+
+            const text =
+                isLight
+                ? "#4b5563"
+                : "#9ba6b8";
+
+
+            /* Chart center */
+
+            const cx =
+                width / 2;
+
+            const cy =
+                height / 2 + 10;
+
+            const radius =
+                Math.min(width, height) * 0.32;
+
+
+            const count =
+                skills.length;
+
+
+            /* =================================================
+               GRID
+            ================================================= */
+
+            for (let level = 1; level <= 5; level++) {
+
+                const r =
+                    radius * level / 5;
+
+                ctx.beginPath();
+
+                for (let i = 0; i < count; i++) {
+
+                    const angle =
+                        -Math.PI / 2 +
+                        i * Math.PI * 2 / count;
+
+                    const x =
+                        cx + Math.cos(angle) * r;
+
+                    const y =
+                        cy + Math.sin(angle) * r;
+
+                    if (i === 0) {
+
+                        ctx.moveTo(x,y);
+
+                    } else {
+
+                        ctx.lineTo(x,y);
+
+                    }
+
+                }
+
+                ctx.closePath();
+
+                ctx.strokeStyle =
+                    isLight
+                    ? "rgba(0,0,0,0.08)"
+                    : "rgba(0,229,255,0.13)";
+
+                ctx.lineWidth = 1;
+
+                ctx.stroke();
+
+            }
+
+
+            /* =================================================
+               AXIS
+            ================================================= */
+
+            for (let i = 0; i < count; i++) {
+
+                const angle =
+                    -Math.PI / 2 +
+                    i * Math.PI * 2 / count;
+
+                const x =
+                    cx + Math.cos(angle) * radius;
+
+                const y =
+                    cy + Math.sin(angle) * radius;
+
+
+                ctx.beginPath();
+
+                ctx.moveTo(cx,cy);
+
+                ctx.lineTo(x,y);
+
+                ctx.strokeStyle =
+                    isLight
+                    ? "rgba(0,0,0,0.08)"
+                    : "rgba(0,229,255,0.12)";
+
+                ctx.stroke();
+
+
+                /* Skill labels */
+
+                const labelDistance =
+                    radius + 28;
+
+                const labelX =
+                    cx +
+                    Math.cos(angle) *
+                    labelDistance;
+
+                const labelY =
+                    cy +
+                    Math.sin(angle) *
+                    labelDistance;
+
+
+                ctx.font =
+                    "600 11px Inter, sans-serif";
+
+                ctx.fillStyle = text;
+
+                ctx.textAlign = "center";
+
+                ctx.textBaseline = "middle";
+
+                ctx.fillText(
+                    skills[i].name,
+                    labelX,
+                    labelY
+                );
+
+            }
+
+
+            /* =================================================
+               DATA AREA
+            ================================================= */
+
+            const points = [];
+
+
+            skills.forEach((skill, i) => {
+
+                const angle =
+                    -Math.PI / 2 +
+                    i * Math.PI * 2 / count;
+
+                const valueRadius =
+                    radius *
+                    skill.value /
+                    100;
+
+                const x =
+                    cx +
+                    Math.cos(angle) *
+                    valueRadius;
+
+                const y =
+                    cy +
+                    Math.sin(angle) *
+                    valueRadius;
+
+                points.push({
+                    x,
+                    y
+                });
+
+            });
+
+
+            /* Gradient */
+
+            const gradient =
+                ctx.createLinearGradient(
+                    0,
+                    0,
+                    width,
+                    height
+                );
+
+            gradient.addColorStop(
+                0,
+                primary
+            );
+
+            gradient.addColorStop(
+                1,
+                secondary
+            );
+
+
+            ctx.beginPath();
+
+            points.forEach((point, i) => {
+
+                if (i === 0) {
+
+                    ctx.moveTo(
+                        point.x,
+                        point.y
+                    );
+
+                } else {
+
+                    ctx.lineTo(
+                        point.x,
+                        point.y
+                    );
+
+                }
+
+            });
+
+            ctx.closePath();
+
+
+            ctx.fillStyle =
+                isLight
+                ? "rgba(0,229,255,0.12)"
+                : "rgba(0,229,255,0.12)";
+
+            ctx.fill();
+
+
+            ctx.strokeStyle =
+                gradient;
+
+            ctx.lineWidth = 3;
+
+            ctx.shadowBlur = 20;
+
+            ctx.shadowColor =
+                primary;
+
+            ctx.stroke();
+
+            ctx.shadowBlur = 0;
+
+
+            /* =================================================
+               DATA POINTS
+            ================================================= */
+
+            points.forEach(point => {
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    point.x,
+                    point.y,
+                    4,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fillStyle =
+                    primary;
+
+                ctx.shadowBlur = 15;
+
+                ctx.shadowColor =
+                    primary;
+
+                ctx.fill();
+
+                ctx.shadowBlur = 0;
+
+            });
+
+
+            /* Center */
+
+            ctx.beginPath();
+
+            ctx.arc(
+                cx,
+                cy,
+                5,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                primary;
+
+            ctx.fill();
+
+        }
+
+
+        /* Draw chart */
+
+        window.addEventListener(
+            "load",
+            drawChart
+        );
+
+        window.addEventListener(
+            "resize",
+            drawChart
+        );
+
+
+        /* =====================================================
+           HOLOGRAM MOUSE INTERACTION
+        ===================================================== */
+
+        const holo =
+            document.querySelector(".holo-wrapper");
+
+
+        holo.addEventListener(
+            "mousemove",
+            event => {
+
+                const rect =
+                    holo.getBoundingClientRect();
+
+                const x =
+                    event.clientX -
+                    rect.left;
+
+                const y =
+                    event.clientY -
+                    rect.top;
+
+                const rotateX =
+                    ((y / rect.height) - 0.5) * -3;
+
+                const rotateY =
+                    ((x / rect.width) - 0.5) * 3;
+
+                canvas.style.transform =
+                    `perspective(900px)
+                     rotateX(${rotateX}deg)
+                     rotateY(${rotateY}deg)
+                     scale(1.01)`;
+
+            }
+        );
+
+
+        holo.addEventListener(
+            "mouseleave",
+            () => {
+
+                canvas.style.transform =
+                    "perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)";
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
